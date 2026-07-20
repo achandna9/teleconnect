@@ -5,7 +5,7 @@ services:
     environment_slug: node-js
     github:
       repo: achandna9/teleconnect
-      branch: main
+      branch: master
       deploy_on_push: true
     source_dir: /
     http_port: 8080
