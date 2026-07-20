@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TeleConnect — Cellphone plans that keep up</title>
+    <meta
+      name="description"
+      content="TeleConnect is a modern cellphone provider with clear plans, fast 5G, and coverage where you actually live."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="#top" aria-label="TeleConnect home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        TeleConnect
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#plans">Plans</a>
+        <a href="#coverage">Coverage</a>
+        <a href="#join" class="nav-cta">Get started</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-label="TeleConnect introduction">
+        <div class="hero-media" aria-hidden="true">
+          <img
+            class="hero-image"
+            src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=2400&q=80"
+            alt=""
+            width="2400"
+            height="1600"
+          />
+          <div class="hero-veil"></div>
+        </div>
+
+        <div class="hero-copy">
+          <p class="brand-lockup reveal">TeleConnect</p>
+          <h1 class="reveal delay-1">Stay close. Go further.</h1>
+          <p class="lede reveal delay-2">
+            Unlimited talk, text, and data on a network built for real life—not fine print.
+          </p>
+          <div class="cta-row reveal delay-3">
+            <a class="btn btn-primary" href="#plans">Shop plans</a>
+            <a class="btn btn-ghost" href="#coverage">Check coverage</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="plans" class="section plans">
+        <div class="section-intro">
+          <h2>Pick a plan that fits how you move</h2>
+          <p>Transparent pricing. No annual traps. Switch anytime.</p>
+        </div>
+
+        <div class="plan-switch" role="tablist" aria-label="Choose a plan">
+          <button class="plan-tab is-active" role="tab" aria-selected="true" data-plan="signal">
+            Signal
+          </button>
+          <button class="plan-tab" role="tab" aria-selected="false" data-plan="pulse">Pulse</button>
+          <button class="plan-tab" role="tab" aria-selected="false" data-plan="orbit">Orbit</button>
+        </div>
+
+        <article class="plan-stage" id="plan-stage" aria-live="polite">
+          <div class="plan-meta">
+            <p class="plan-kicker" id="plan-kicker">Everyday essentials</p>
+            <h3 id="plan-name">Signal</h3>
+            <p class="plan-price">
+              <span id="plan-price">$35</span><span class="per">/mo</span>
+            </p>
+            <p class="plan-data" id="plan-data">15 GB high-speed data</p>
+          </div>
+          <ul class="plan-perks" id="plan-perks"></ul>
+          <a class="btn btn-primary" href="#join">Start with this plan</a>
+        </article>
+      </section>
+
+      <section id="coverage" class="section coverage">
+        <div class="coverage-copy">
+          <h2>Coverage that follows your day</h2>
+          <p>
+            TeleConnect rides a nationwide 5G footprint—cities, suburbs, and the roads between.
+            Enter your ZIP to preview service near you.
+          </p>
+          <form class="zip-form" id="zip-form">
+            <label class="sr-only" for="zip">ZIP code</label>
+            <input
+              id="zip"
+              name="zip"
+              inputmode="numeric"
+              pattern="[0-9]{5}"
+              maxlength="5"
+              placeholder="Enter ZIP"
+              required
+            />
+            <button type="submit" class="btn btn-primary">Preview coverage</button>
+          </form>
+          <p class="zip-result" id="zip-result" hidden></p>
+        </div>
+        <div class="coverage-visual" aria-hidden="true">
+          <div class="signal-rings">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </section>
+
+      <section id="join" class="section join">
+        <h2>Ready when you are</h2>
+        <p>Bring your own phone or grab a new one. Activation takes minutes.</p>
+        <a class="btn btn-primary" href="mailto:hello@teleconnect.example?subject=Start%20TeleConnect">
+          Talk to TeleConnect
+        </a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-brand">TeleConnect</p>
+      <p>© <span id="year"></span> TeleConnect. A demo app for DigitalOcean App Platform.</p>
+    </footer>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
