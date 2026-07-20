@@ -32,7 +32,8 @@ const plans = [
 ];
 
 app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok", service: "teleconnect" });
+  // DEMO: intentional failure so App Platform rejects this deploy
+  res.status(503).json({ status: "error", service: "teleconnect", reason: "broken commit" });
 });
 
 app.get("/api/plans", (_req, res) => {
