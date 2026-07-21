@@ -91,3 +91,89 @@ zipForm.addEventListener("submit", (event) => {
   zipResult.hidden = false;
   zipResult.textContent = `ZIP ${zip}: ${strength} TeleConnect 5G coverage in your area.`;
 });
+
+const chatWidget = document.getElementById("chat-widget");
+const chatPanel = document.getElementById("chat-panel");
+const chatLauncher = document.getElementById("chat-launcher");
+const chatClose = document.getElementById("chat-close");
+const chatForm = document.getElementById("chat-form");
+const chatInput = document.getElementById("chat-input");
+const chatSend = document.getElementById("chat-send");
+const chatMessages = document.getElementById("chat-messages");
+
+const chatHistory = [];
+const GREETING =
+  "Hi — I'm the TeleConnect helper. Ask about plans, coverage, or switching.";
+
+function appendBubble(text, kind) {
+  const bubble = document.createElement("div");
+  bubble.className = `chat-bubble ${kind}`;
+  bubble.textContent = text;
+  chatMessages.appendChild(bubble);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  return bubble;
+}
+
+function setChatOpen(open) {
+  chatPanel.hidden = !open;
+  chatPanel.setAttribute("aria-hidden", open ? "false" : "true");
+  chatLauncher.setAttribute("aria-expanded", open ? "true" : "false");
+  chatWidget.classList.toggle("is-open", open);
+  if (open) {
+    chatInput.focus();
+  }
+}
+
+function setChatBusy(busy) {
+  chatInput.disabled = busy;
+  chatSend.disabled = busy;
+}
+
+chatLauncher.addEventListener("click", () => {
+  setChatOpen(chatPanel.hidden);
+});
+
+chatClose.addEventListener("click", () => {
+  setChatOpen(false);
+});
+
+appendBubble(GREETING, "bot");
+
+chatForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const content = chatInput.value.trim();
+  if (!content) return;
+
+  appendBubble(content, "user");
+  chatHistory.push({ role: "user", content });
+  chatInput.value = "";
+  setChatBusy(true);
+
+  const pending = appendBubble("Thinking…", "bot pending");
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: chatHistory }),
+    });
+
+    const data = await response.json().catch(() => ({}));
+    pending.remove();
+
+    if (!response.ok) {
+      appendBubble(data.error || "Something went wrong. Please try again.", "error");
+      return;
+    }
+
+    const reply = data.reply || "I could not generate a reply.";
+    appendBubble(reply, "bot");
+    chatHistory.push({ role: "assistant", content: reply });
+  } catch (_err) {
+    pending.remove();
+    appendBubble("Network error. Check your connection and try again.", "error");
+  } finally {
+    setChatBusy(false);
+    chatInput.focus();
+  }
+});

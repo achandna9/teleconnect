@@ -126,6 +126,44 @@
       <p>© <span id="year"></span> TeleConnect. A demo app for DigitalOcean App Platform.</p>
     </footer>
 
+    <div class="chat-widget" id="chat-widget">
+      <div
+        class="chat-panel"
+        id="chat-panel"
+        role="dialog"
+        aria-labelledby="chat-title"
+        aria-hidden="true"
+        hidden
+      >
+        <header class="chat-header">
+          <div>
+            <p class="chat-title" id="chat-title">TeleConnect help</p>
+            <p class="chat-subtitle">Ask about plans, coverage, or switching</p>
+          </div>
+          <button type="button" class="chat-close" id="chat-close" aria-label="Close chat">
+            ×
+          </button>
+        </header>
+        <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
+        <form class="chat-form" id="chat-form">
+          <label class="sr-only" for="chat-input">Message</label>
+          <input
+            id="chat-input"
+            name="message"
+            type="text"
+            autocomplete="off"
+            placeholder="Ask a question…"
+            maxlength="1000"
+            required
+          />
+          <button type="submit" class="btn btn-primary chat-send" id="chat-send">Send</button>
+        </form>
+      </div>
+      <button type="button" class="chat-launcher" id="chat-launcher" aria-expanded="false">
+        Chat with us
+      </button>
+    </div>
+
     <script src="/app.js" defer></script>
   </body>
 </html>

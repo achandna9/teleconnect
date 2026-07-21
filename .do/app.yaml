@@ -13,6 +13,13 @@ services:
     instance_size_slug: basic-xxs
     build_command: npm install
     run_command: npm start
+    envs:
+      - key: INFERENCE_API_KEY
+        scope: RUN_TIME
+        type: SECRET
+      - key: INFERENCE_MODEL
+        scope: RUN_TIME
+        value: openai-gpt-4o-mini
     health_check:
       http_path: /api/health
       initial_delay_seconds: 10
